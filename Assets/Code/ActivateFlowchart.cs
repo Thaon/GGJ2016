@@ -15,6 +15,7 @@ public class ActivateFlowchart : MonoBehaviour {
         if (other.tag == "Player")
         {
             flowchart.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 	public void Moveplayer() 
