@@ -4,7 +4,7 @@ using System.Collections;
 public class ActivateFlowchart : MonoBehaviour {
 
     public GameObject flowchart;
-
+	public GameObject newPos;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,4 +17,12 @@ public class ActivateFlowchart : MonoBehaviour {
             flowchart.SetActive(true);
         }
     }
+	public void Moveplayer() 
+	{
+		if (newPos != null)
+		{
+			GameObject.FindWithTag("Player").transform.position = newPos.transform.position;
+		}
+	}
+
 }
