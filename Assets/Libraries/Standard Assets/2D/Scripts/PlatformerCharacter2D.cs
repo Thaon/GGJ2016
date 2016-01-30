@@ -7,8 +7,6 @@ namespace UnityStandardAssets._2D
     {
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
-        [Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;  // Amount of maxSpeed applied to crouching movement. 1 = 100%
-        [SerializeField] private bool m_AirControl = false;                 // Whether or not a player can steer while jumping;
         [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
@@ -65,11 +63,8 @@ namespace UnityStandardAssets._2D
             m_Anim.SetBool("Crouch", crouch);
 
             //only control the player if grounded or airControl is turned on
-            if (m_Grounded || m_AirControl)
+            if (m_Grounded)
             {
-                // Reduce the speed if crouching by the crouchSpeed multiplier
-                move = (crouch ? move*m_CrouchSpeed : move);
-
                 // The Speed animator parameter is set to the absolute value of the horizontal input.
                 m_Anim.SetFloat("Speed", Mathf.Abs(move));
 
@@ -88,14 +83,6 @@ namespace UnityStandardAssets._2D
                     // ... flip the player.
                     Flip();
                 }
-            }
-            // If the player should jump...
-            if (m_Grounded && jump && m_Anim.GetBool("Ground"))
-            {
-                // Add a vertical force to the player.
-                m_Grounded = false;
-                m_Anim.SetBool("Ground", false);
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }
 
