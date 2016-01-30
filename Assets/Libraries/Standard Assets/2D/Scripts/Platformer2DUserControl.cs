@@ -11,6 +11,7 @@ namespace UnityStandardAssets._2D
         private bool m_Jump;
 
         public bool m_isActive = true;
+        GameObject m_changeAreaTrigger;
 
 
         private void Awake()
@@ -21,6 +22,15 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            if (Input.GetButtonDown("Use"))
+            {
+                //Debug.Log(m_changeAreaTrigger);
+                if (m_changeAreaTrigger != null)
+                {
+                    m_changeAreaTrigger.GetComponent<ChangeArea>().Use();
+                    m_changeAreaTrigger = null;
+                }
+            }
         }
 
 
@@ -48,6 +58,21 @@ namespace UnityStandardAssets._2D
         void TakeControl()
         {
             m_isActive = false;
+        }
+
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.tag == "AreaTrigger")
+            {
+                m_changeAreaTrigger = other.gameObject;
+            }
+        }
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.tag == "AreaTrigger")
+            {
+                m_changeAreaTrigger = null;
+            }
         }
     }
 }
