@@ -25,8 +25,8 @@ public class FancyPantsScript : MonoBehaviour {
 	void Update () {
         if (m_keysAvailable)
         {
-            float distanceToKey = ( Vector2.Distance(transform.position, m_keys[m_activeKey].transform.position) / 15 );
-            float distanceToDoor = ( Vector2.Distance(transform.position, m_theDoor.transform.position) / 15 );
+            float distanceToKey = ( Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_keys[m_activeKey].transform.position) / 15 );
+            float distanceToDoor = ( Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_theDoor.transform.position) / 15 );
 
             if (distanceToKey > 1)
             {
@@ -57,7 +57,7 @@ public class FancyPantsScript : MonoBehaviour {
         }
         else
         {
-            float distanceToDoor = (Vector2.Distance(transform.position, m_theDoor.transform.position) / 5);
+            float distanceToDoor = (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_theDoor.transform.position) / 5);
 
             if (distanceToDoor > 1)
             {
@@ -76,7 +76,7 @@ public class FancyPantsScript : MonoBehaviour {
     public void UpdateKey()
     {
         m_activeKey++;
-        if (m_activeKey > 2)
+        if (m_activeKey > 1)
             m_keysAvailable = false;
     }
 }

@@ -26,8 +26,8 @@ namespace UnityStandardAssets._2D
         {
             if (Input.GetButtonDown("Use"))
             {
-                //Debug.Log(m_changeAreaTrigger);
-                //Debug.Log(m_InteractTrigger);
+                Debug.Log(m_changeAreaTrigger);
+                Debug.Log(m_InteractTrigger);
 
 
                 if (m_changeAreaTrigger != null)
@@ -110,6 +110,10 @@ namespace UnityStandardAssets._2D
             {
                 m_keyPiece = null;
             }
+        }
+        public void ResetPosition()
+        {
+            transform.position = GameObject.Find("New_pos_Start").transform.position;
         }
     }
 }

@@ -14,7 +14,15 @@ public class GameData : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void NextDay () {
+	public void NextDay () {
         m_storyTime++;
+        Transform children = m_storyPresets[0].GetComponentInChildren<Transform>();
+        //Debug.Log(children);
+        foreach (Transform go in children)
+        {
+            //Debug.Log(go);
+            go.gameObject.SetActive(true);
+        }
+        
 	}
 }
