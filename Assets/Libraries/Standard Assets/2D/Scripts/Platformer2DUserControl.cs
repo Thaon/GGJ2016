@@ -12,6 +12,8 @@ namespace UnityStandardAssets._2D
 
         public bool m_isActive = true;
         GameObject m_changeAreaTrigger;
+        GameObject m_InteractTrigger;
+        GameObject m_keyPiece;
 
 
         private void Awake()
@@ -25,10 +27,25 @@ namespace UnityStandardAssets._2D
             if (Input.GetButtonDown("Use"))
             {
                 //Debug.Log(m_changeAreaTrigger);
+                //Debug.Log(m_InteractTrigger);
+
+
                 if (m_changeAreaTrigger != null)
                 {
                     m_changeAreaTrigger.GetComponent<ChangeArea>().Use();
                     m_changeAreaTrigger = null;
+                }
+
+                if (m_InteractTrigger != null)
+                {
+                    m_InteractTrigger.GetComponent<Interact>().Use();
+                    m_InteractTrigger = null;
+                }
+
+                if (m_keyPiece != null)
+                {
+                    m_keyPiece.GetComponent<KeyPiece>().Use();
+                    m_keyPiece = null;
                 }
             }
         }
@@ -66,12 +83,32 @@ namespace UnityStandardAssets._2D
             {
                 m_changeAreaTrigger = other.gameObject;
             }
+
+            if (other.tag == "Interactible")
+            {
+                m_InteractTrigger = other.gameObject;
+            }
+
+            if (other.tag == "KeyPiece")
+            {
+                m_keyPiece = other.gameObject;
+            }
         }
         void OnTriggerExit2D(Collider2D other)
         {
             if (other.tag == "AreaTrigger")
             {
                 m_changeAreaTrigger = null;
+            }
+
+            if (other.tag == "Interactible")
+            {
+                m_InteractTrigger = null;
+            }
+
+            if (other.tag == "KeyPiece")
+            {
+                m_keyPiece = null;
             }
         }
     }

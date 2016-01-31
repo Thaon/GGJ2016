@@ -8,12 +8,9 @@ public class KeyPiece : MonoBehaviour {
 	
 	}
 	
-	void OnTriggerEnter2D(Collider2D other)
+	public void Use()
     {
-        if (other.tag == "Player")
-        {
-            GameObject.FindWithTag("MainCamera").GetComponent<FancyPantsScript>().UpdateKey();
-            Destroy(this.gameObject);
-        }
+        GameObject.FindWithTag("MainCamera").GetComponent<FancyPantsScript>().UpdateKey();
+        Destroy(this.gameObject);
     }
 }
