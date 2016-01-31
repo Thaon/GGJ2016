@@ -21,7 +21,7 @@ public class SafeCheck : MonoBehaviour {
                 return;
             }
         }
-        Debug.Log("correct");
+        Debug.Log("bafta");
     }
 
     void Update()
