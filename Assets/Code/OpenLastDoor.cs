@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Interact : MonoBehaviour
+public class OpenLastDoor : MonoBehaviour
 {
     public GameObject m_gameData;
     public GameObject m_flowchart;
@@ -33,8 +33,10 @@ public class Interact : MonoBehaviour
 
     public void Use()
     {
-        if (m_flowchart != null)
+        Debug.Log("ok");
+        if (m_gameData != null && m_gameData.GetComponent<FancyPantsScript>().m_activeKey >= 2)
         {
+            Debug.Log("okk");
             m_flowchart.SetActive(true);
         }
     }

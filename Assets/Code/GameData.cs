@@ -7,6 +7,7 @@ public class GameData : MonoBehaviour {
 
     int m_storyTime = 0;
     public GameObject[] m_storyPresets;
+    public bool m_hasPlant = false;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +24,23 @@ public class GameData : MonoBehaviour {
             //Debug.Log(go);
             go.gameObject.SetActive(true);
         }
-        
+        //Debug.Log(m_storyTime);
+        if (m_storyTime == 3)
+        {
+            //Debug.Log(children);
+            foreach (Transform go in m_storyPresets[1].GetComponentInChildren<Transform>())
+            {
+                //Debug.Log(go);
+                if (go.gameObject.activeInHierarchy)
+                    go.gameObject.SetActive(false);
+                else
+                    go.gameObject.SetActive(true);
+            }
+        }
 	}
+
+    public void GetPlant()
+    {
+        m_hasPlant = true;
+    }
 }

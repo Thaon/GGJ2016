@@ -7,12 +7,16 @@ public class FancyPantsScript : MonoBehaviour {
     [SerializeField]
     public GameObject m_theDoor;
     public GameObject[] m_keys;
-    public int m_activeKey = 0;
+    public int m_activeKey = 2;
     GameObject m_camera;
     Grayscale m_grayScale;
     bool m_keysAvailable = true;
+    float distanceToKey;
 
     float m_offset = 0.1f;
+
+    public GameObject m_music1;
+    public GameObject m_music2;
 
 
     // Use this for initialization
@@ -25,8 +29,20 @@ public class FancyPantsScript : MonoBehaviour {
 	void Update () {
         if (m_keysAvailable)
         {
-            float distanceToKey = ( Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_keys[m_activeKey].transform.position) / 15 );
+            float distanceToKey1 = ( Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_keys[0].transform.position) / 15 );
+            float distanceToKey2 = (Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_keys[1].transform.position) / 15);
+
             float distanceToDoor = ( Vector2.Distance(GameObject.FindWithTag("Player").transform.position, m_theDoor.transform.position) / 15 );
+
+            if (distanceToKey1 > distanceToKey2)
+            {
+                distanceToKey = distanceToKey2;
+            }
+            else
+            {
+                distanceToKey = distanceToKey1;
+            }
+
 
             if (distanceToKey > 1)
             {
@@ -78,5 +94,19 @@ public class FancyPantsScript : MonoBehaviour {
         m_activeKey++;
         if (m_activeKey > 1)
             m_keysAvailable = false;
+        if (m_activeKey == 1)
+        {
+            m_music1.SetActive(true);
+        }
+        if (m_activeKey == 2)
+        {
+            m_music1.SetActive(false);
+            m_music2.SetActive(true);
+        }
+    }
+
+    public void EndGame()
+    {
+        Application.Quit();
     }
 }

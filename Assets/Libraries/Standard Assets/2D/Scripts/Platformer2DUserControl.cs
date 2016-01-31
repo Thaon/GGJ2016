@@ -13,6 +13,7 @@ namespace UnityStandardAssets._2D
         public bool m_isActive = true;
         GameObject m_changeAreaTrigger;
         GameObject m_InteractTrigger;
+        GameObject m_EndTrigger;
         GameObject m_keyPiece;
 
 
@@ -24,10 +25,15 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
             if (Input.GetButtonDown("Use"))
             {
-                Debug.Log(m_changeAreaTrigger);
-                Debug.Log(m_InteractTrigger);
+                //Debug.Log(m_changeAreaTrigger);
+                //Debug.Log(m_InteractTrigger);
 
 
                 if (m_changeAreaTrigger != null)
@@ -46,6 +52,12 @@ namespace UnityStandardAssets._2D
                 {
                     m_keyPiece.GetComponent<KeyPiece>().Use();
                     m_keyPiece = null;
+                }
+
+                if (m_EndTrigger != null)
+                {
+                    m_EndTrigger.GetComponent<OpenLastDoor>().Use();
+                    m_EndTrigger = null;
                 }
             }
         }
@@ -87,6 +99,11 @@ namespace UnityStandardAssets._2D
             if (other.tag == "Interactible")
             {
                 m_InteractTrigger = other.gameObject;
+            }
+
+            if (other.tag == "End")
+            {
+                m_EndTrigger = other.gameObject;
             }
 
             if (other.tag == "KeyPiece")
