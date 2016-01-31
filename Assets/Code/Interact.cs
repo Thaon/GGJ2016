@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class ChangeArea : MonoBehaviour {
+public class Interact : MonoBehaviour
+{
 
     public GameObject m_flowchart;
     public GameObject m_UICanvas;
-    public GameObject m_newPos;
+    public string m_prompt;
+
     // Use this for initialization
     void Start()
     {
@@ -17,6 +20,7 @@ public class ChangeArea : MonoBehaviour {
         if (other.tag == "Player")
         {
             m_UICanvas.SetActive(true);
+            m_UICanvas.GetComponentInChildren<Text>().text = m_prompt;
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -29,17 +33,9 @@ public class ChangeArea : MonoBehaviour {
 
     public void Use()
     {
-        if (m_flowchart != null && m_newPos != null)
+        if (m_flowchart != null)
         {
             m_flowchart.SetActive(true);
-        }
-    }
-
-    public void Moveplayer()
-    {
-        if (m_newPos != null)
-        {
-            GameObject.FindWithTag("Player").transform.position = m_newPos.transform.position;
         }
     }
 }
